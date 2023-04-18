@@ -1,0 +1,13 @@
+{
+  "name": "insomnia-plugin-gotom-hmac",
+  "version": "1.0.0",
+  "private": false,
+  "insomnia": {
+    "name": "insomnia-plugin-gotom-hmac",
+    "description": ""
+  },
+  "dependencies": {
+    "crypto-js": "~3.3.0"
+  },
+  "main": "main.js"
+}
