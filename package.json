@@ -6,6 +6,10 @@
     "name": "insomnia-plugin-gotom-hmac",
     "description": ""
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gotom-io/gotom-insomnia-hmac"
+  },
   "dependencies": {
     "crypto-js": "~3.3.0"
   },
