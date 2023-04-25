@@ -29,7 +29,7 @@ function prepareRequestForGotomCall(req){
     let user = req.getEnvironmentVariable('gotom_api_user');
     let secret = req.getEnvironmentVariable('gotom_api_secret');
 
-    if(isGraphApi && req.getEnvironmentVariable('graph_export_gotom_api_user')){ // we have some special demo users for graph api calls in demo
+    if(isGraphApi && req.getEnvironmentVariable('graph_export_gotom_api_user')){
         user = req.getEnvironmentVariable('graph_export_gotom_api_user');
         secret = req.getEnvironmentVariable('graph_export_gotom_api_secret');
     }
@@ -68,7 +68,6 @@ module.exports.requestHooks = [
             return;
         }
         const req = context.request;
-        window.gotomReq = context.request; //for debugging what type this is
         // Validate URL
         if (
             !req.hasOwnProperty('getUrl') ||
