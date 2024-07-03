@@ -24,15 +24,27 @@ function prepareRequestForGotomCall(req){
         .replace(re2, '')
     ;
 
-    const isGraphApi = urlPath.includes('app-api/custom-report-export')
-    || urlPath.includes('app-api/graph-export');
-    let user = req.getEnvironmentVariable('gotom_api_user');
-    let secret = req.getEnvironmentVariable('gotom_api_secret');
+    const isGraphApi = urlPath.includes('app-api/custom-report-export') || urlPath.includes('app-api/graph-export');
+    const isActivityApi = urlPath.includes('app-api/activity');
 
-    if(isGraphApi && req.getEnvironmentVariable('graph_export_gotom_api_user')){
+    let user = '';
+    let secret = '';
+
+
+    if(isGraphApi){
+        checkIfUserIsThere('graph_export_gotom_api_user', 'graph_export_gotom_api_secret');
         user = req.getEnvironmentVariable('graph_export_gotom_api_user');
         secret = req.getEnvironmentVariable('graph_export_gotom_api_secret');
+    }else if(isActivityApi){
+        checkIfUserIsThere('gotom_activity_apiuser', 'gotom_activity_apisecret');
+        user = req.getEnvironmentVariable('gotom_activity_apiuser');
+        secret = req.getEnvironmentVariable('gotom_activity_apisecret');
+    }else{
+        checkIfUserIsThere('gotom_api_user', 'gotom_api_secret');
+        user = req.getEnvironmentVariable('gotom_api_user');
+        secret =  req.getEnvironmentVariable('gotom_api_secret');
     }
+
     const digestParts = [
         req.getMethod(),
         CryptoJS.MD5(req.getBodyText()).toString(),
@@ -45,8 +57,22 @@ function prepareRequestForGotomCall(req){
 
     const signature = provider + ' ' + user + ':' + CryptoJS.HmacSHA1(digestParts.join('\n'), secret).toString(CryptoJS.enc.Base64)
 
-    req.setHeader('Authorization', signature);
+    req.setHeader('Authorization', signature)
 
+    function checkIfUserIsThere(userPropertyName, secretPropertyName) {
+        if(req.getEnvironmentVariable(userPropertyName) && req.getEnvironmentVariable(secretPropertyName)){
+            return;
+        }
+        let message = 'Be sure to create user with secret in the environment: user: ' + userPropertyName + ' secret: ' + secretPropertyName + `
+                e.g.:
+                {
+                   "${userPropertyName}": "api username given by gotom",
+                   "${secretPropertyName}": "api password given by gotom"
+                }
+        `;
+        alert(message);
+        throw message;
+    }
 }
 
 
