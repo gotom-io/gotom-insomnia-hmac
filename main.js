@@ -24,6 +24,20 @@ function prepareRequestForGotomCall(req){
         .replace(re2, '')
     ;
 
+    const params = req.getParameters?.();
+
+    if (Array.isArray(params) && params.length > 0) {
+        const queryString = params
+            .map(({ name, value }) => {
+                const encodedName = encodeURIComponent(name);
+                const encodedValue = encodeURIComponent(value ?? '');
+                return `${encodedName}=${encodedValue}`;
+            })
+            .join('&');
+
+        urlPath += `?${queryString}`;
+    }
+
     const isGraphApi = urlPath.includes('app-api/custom-report-export') || urlPath.includes('app-api/graph-export');
     const isActivityApi = urlPath.includes('app-api/activity');
 

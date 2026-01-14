@@ -1,6 +1,6 @@
 {
   "name": "insomnia-plugin-gotom-hmac",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "insomnia": {
     "name": "insomnia-plugin-gotom-hmac",
