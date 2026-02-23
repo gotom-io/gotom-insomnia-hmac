@@ -60,9 +60,9 @@ function prepareRequestForGotomCall(req){
     }
 
     const digestParts = [
-        req.getMethod(),
+        req.getMethod().toUpperCase(),
         CryptoJS.MD5(req.getBodyText()).toString(),
-        contentType,
+        contentType.toLowerCase(),
         now,
         '', // for custom headers?
         urlPath,
