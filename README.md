@@ -35,3 +35,17 @@ To manually install the plugin, just copy it into the plugins folder. Something 
 or press "reveal plugins folder" in Insomnia - Application - Preferences - Plugins
 
 See as well Plugin Configuration step
+
+
+## Publish to npm example
+1. update version nr
+```shell 
+npm login
+git tag v1.0.5
+git push origin v1.0.5
+```
+copy paste auth token https://www.npmjs.com/settings/lukasgotom/tokens/ or generate there with bypass 2fa
+```shell 
+npm config set //registry.npmjs.org/:_authToken=npm_<YOURAUTHTOKEN_THAT_BYPASSES2fa_auth>
+npm publish --access public
+```
