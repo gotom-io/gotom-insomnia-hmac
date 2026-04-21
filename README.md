@@ -12,9 +12,16 @@ If you are not a goTom user, then this plugin won't help you solve your issues w
 4. Press install
 
 ### Plugin Configuration
-1. Set insomnia to debug mode (the menu in the middle at the top that says: design - debug - test, select 'debug')
-2. Click on the 'Environment' (typically 'No Environment') - click 'Manage Environments'
-3. Copy paste this json with the values that you received from support:
+*** this was changed recently. So take this is a rough outline
+
+1. It's assumed you are in 'Personal Workspace' (Top left home icon)
+2. Click + Create -> Request Collection
+3. Set up endpoints, I believe you can figure this out.
+4. Click on "Base Environment"
+5. Click on the little Pencil Icon next to "Collection environment"
+6. You are in "Manage environments". Focus on the big editor in the middle. Top right it says "Table View"
+7. "Table view" is a bit evil. Just disable it - you should see json instead.
+8. Copy paste this json with the values that you received from support:
 
 ```
 {
